@@ -1,0 +1,36 @@
+/* Monokai Pro Theme Variables */
+:root[data-theme="monokai"] {
+    /* Background Colors */
+    --bg-primary: #2D2A2E;
+    --bg-secondary: #403E41;
+    --bg-tertiary: #5B595C;
+    --bg-hover: #4A4751;
+    
+    /* Text Colors */
+    --text-primary: #FCFCFA;
+    --text-secondary: #C1C0C0;
+    --text-muted: #939293;
+    
+    /* Accent Colors */
+    --accent-purple: #AB9DF2;
+    --accent-purple-alpha: rgba(171, 157, 242, 0.2);
+    --accent-green: #A9DC76;
+    --accent-orange: #FC9867;
+    --accent-pink: #FF6188;
+    --accent-blue: #78DCE8;
+    
+    /* Border Colors */
+    --border-color: #5B595C;
+    --border-light: #6B696C;
+    
+    /* Status Colors */
+    --success: #A9DC76;
+    --warning: #FC9867;
+    --error: #FF6188;
+    --info: #78DCE8;
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+}

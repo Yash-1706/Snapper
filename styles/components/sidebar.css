@@ -1,0 +1,67 @@
+/* Fix Sidebar Container - Remove conflicting width constraints */
+.sidebar-container {
+    width: 100vw; /* Use viewport width instead of 100% */
+    min-width: unset; /* Remove min-width constraint */
+    max-width: unset; /* Remove max-width constraint */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-primary);
+    border-left: 1px solid var(--border-color);
+    overflow: hidden;
+    box-sizing: border-box;
+    /* Remove position and resize properties that conflict with Chrome's side panel */
+}
+
+/* Ensure all elements use full available width */
+.sidebar-header,
+.context-selection,
+.chat-container,
+.quick-actions,
+.input-section {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Fix Header Layout */
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    min-height: 50px;
+    flex-shrink: 0;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+}
+
+.header-right {
+    flex-shrink: 0;
+}
+
+/* Fix Context Selection */
+.context-selection {
+    padding: 16px;
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.context-dropdown {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-size: 14px;
+    box-sizing: border-box;
+}

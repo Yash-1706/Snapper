@@ -1,0 +1,111 @@
+/* Reset and Base styles*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 14px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    overflow: hidden;
+    user-select: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-purple);
+}
+
+/*Typography*/
+h1, h2, h3 {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+p {
+    color: var(--text-secondary);
+}
+
+/* Button Base Styles */
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+button:focus {
+    outline: 2px solid var(--accent-purple);
+    outline-offset: 2px;
+}
+
+/* Input Base Styles */
+input, textarea, select {
+    font-family: inherit;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 0 3px var(--accent-purple-alpha);
+}
+
+/* Responsive Breakpoints for Sidebar */
+
+/* Small sidebar (300-400px) */
+@container (max-width: 400px) {
+    .app-title {
+        font-size: 14px;
+    }
+    
+    .welcome-content h2 {
+        font-size: 16px;
+    }
+    
+    .quick-actions-content {
+        grid-template-columns: 1fr; /* Single column for small width */
+    }
+    
+    .input-section {
+        padding: 12px;
+    }
+}
+
+/* Medium sidebar (400-500px) */
+@container (min-width: 400px) and (max-width: 500px) {
+    .quick-actions-content {
+        grid-template-columns: 1fr 1fr; /* Two columns */
+    }
+}
+
+/* Large sidebar (500px+) */
+@container (min-width: 500px) {
+    .quick-actions-content {
+        grid-template-columns: repeat(3, 1fr); /* Three columns for wider sidebar */
+    }
+    
+    .welcome-content {
+        padding: 0 20px;
+    }
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snapper Sidebar</title>
+    
+    <!-- Load CSS dynamically via external script -->
+    <script src="scripts/css-loader.js"></script>
+</head>
+<body data-theme="monokai">
+    <div class="sidebar-container">
+        
+        <!-- Header Section - Simplified -->
+        <header class="sidebar-header">
+            <div class="header-left">
+                <img src="../assets/images/logo.svg" alt="Snapper" class="logo">
+                <h1 class="app-title">Snapper</h1>
+            </div>
+            <div class="header-right">
+                <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Context Selection Section -->
+        <div class="context-selection">
+            <label for="contextMode" class="context-label">Content Analysis Mode:</label>
+            <select id="contextMode" class="context-dropdown">
+                <option value="fullPage">Full Page Content</option>
+                <option value="viewport">Visible Viewport Only</option>
+            </select>
+        </div>
+
+        <!-- Loading State -->
+        <div class="loading-container" id="loadingContainer" style="display: none;">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Extracting content...</p>
+        </div>
+
+        <!-- Main Chat Container -->
+        <div class="chat-container" id="chatContainer">
+            
+            <!-- Welcome Message -->
+            <div class="welcome-message" id="welcomeMessage">
+                <div class="welcome-content">
+                    <h2>Welcome to Snapper!</h2>
+                    <p>Select your content analysis mode above, then start asking questions about this page.</p>
+                </div>
+            </div>
+
+            <!-- Chat Messages -->
+            <div class="chat-messages" id="chatMessages">
+                <!-- Messages will be dynamically added here -->
+            </div>
+
+            <!-- Quick Actions (Expandable) -->
+            <div class="quick-actions" id="quickActions">
+                <button class="quick-actions-toggle" id="quickActionsToggle">
+                    <span class="toggle-text">Quick Actions</span>
+                    <span class="toggle-arrow">▼</span>
+                </button>
+                <div class="quick-actions-content" id="quickActionsContent" style="display: none;">
+                    <button class="quick-action-btn" data-prompt="Summarize this page in 3-4 sentences.">
+                        📝 Summarize
+                    </button>
+                    <button class="quick-action-btn" data-prompt="List the main points or key information from this page.">
+                        📋 Key Points
+                    </button>
+                    <button class="quick-action-btn" data-prompt="Explain the main topic of this page in simple terms.">
+                        💡 Explain
+                    </button>
+                    <button class="quick-action-btn" data-prompt="What are the most important takeaways from this content?">
+                        ⭐ Takeaways
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Section -->
+        <div class="input-section">
+            <div class="input-container">
+                <textarea 
+                    id="userInput" 
+                    class="user-input" 
+                    placeholder="Ask a question about this page..."
+                    rows="1"
+                ></textarea>
+                <button class="send-btn" id="sendBtn" disabled title="Send message">
+                    <span class="send-icon">→</span>
+                </button>
+            </div>
+            <div class="input-footer">
+                <span class="input-hint">Press Enter to send, Shift+Enter for new line</span>
+            </div>
+        </div>
+
+
+        <!-- Status Bar (Optional) -->
+        <div class="status-bar" id="statusBar" style="display: none;">
+            <span class="status-text" id="statusText"></span>
+        </div>
+
+    </div>
+
+    <!-- Load JavaScript files -->
+    <script src="scripts/theme-manager.js"></script>
+    <script src="scripts/ui-controller.js"></script>
+    <script src="scripts/chat-handler.js"></script>
+    <script src="scripts/sidebar.js"></script>
+</body>
+</html>
