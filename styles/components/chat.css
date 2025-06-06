@@ -129,3 +129,39 @@
     cursor: pointer;
     flex-shrink: 0;
 }
+
+/* Better typography for welcome message */
+.welcome-content h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--accent-purple);
+    letter-spacing: -0.02em;
+}
+
+.welcome-content p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Quick action buttons with better typography */
+.quick-action-btn {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.01em;
+}
+
+/* Input hint with better typography */
+.input-hint {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+}
