@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snapper Sidebar</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="scripts/config.js"></script>
     <script src="scripts/css-loader.js"></script>
 </head>
+
 <body data-theme="monokai">
     <div class="sidebar-container">
-        
+
         <!-- Header Section -->
         <header class="sidebar-header">
             <div class="header-left">
@@ -40,16 +43,20 @@
         <div class="quick-actions" id="quickActions">
             <h3 class="quick-actions-title">Quick Analysis</h3>
             <div class="quick-actions-grid">
-                <button class="quick-action-btn" data-prompt="Summarize this page in 3-4 sentences." data-action="summarize">
+                <button class="quick-action-btn" data-prompt="Summarize this page in 3-4 sentences."
+                    data-action="summarize">
                     📝 Summarize
                 </button>
-                <button class="quick-action-btn" data-prompt="List the main points or key information from this page." data-action="keypoints">
+                <button class="quick-action-btn" data-prompt="List the main points or key information from this page."
+                    data-action="keypoints">
                     📋 Key Points
                 </button>
-                <button class="quick-action-btn" data-prompt="Explain the main topic of this page in simple terms." data-action="explain">
+                <button class="quick-action-btn" data-prompt="Explain the main topic of this page in simple terms."
+                    data-action="explain">
                     💡 Explain
                 </button>
-                <button class="quick-action-btn" data-prompt="What are the most important takeaways from this content?" data-action="takeaways">
+                <button class="quick-action-btn" data-prompt="What are the most important takeaways from this content?"
+                    data-action="takeaways">
                     ⭐ Takeaways
                 </button>
             </div>
@@ -57,7 +64,7 @@
 
         <!-- Main Chat Container -->
         <div class="chat-container" id="chatContainer">
-            
+
             <!-- Welcome Message -->
             <div class="welcome-message" id="welcomeMessage">
                 <div class="welcome-content">
@@ -75,12 +82,8 @@
         <!-- Input Section -->
         <div class="input-section">
             <div class="input-container">
-                <textarea 
-                    id="userInput" 
-                    class="user-input" 
-                    placeholder="Ask a question about this page..."
-                    rows="1"
-                ></textarea>
+                <textarea id="userInput" class="user-input" placeholder="Ask a question about this page..."
+                    rows="1"></textarea>
                 <button class="send-btn" id="sendBtn">
                     <span class="send-icon">→</span>
                 </button>
@@ -94,7 +97,6 @@
 
     <!-- Scripts - Add dev-config FIRST -->
     <script src="scripts/dev-config.js"></script>
-    <script src="scripts/config.js"></script>
     <script src="scripts/theme-manager.js"></script>
     <script src="scripts/gemini-api.js"></script>
     <script src="scripts/chat-handler.js"></script>
@@ -103,4 +105,5 @@
 
 
 </body>
+
 </html>

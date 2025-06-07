@@ -1,8 +1,5 @@
 # Environment variables
 .env
-sidebar/scripts/dev-config.js
-sidebar/scripts/config.js
-api-keys.js
 secrets/
 
 # Development files 
