@@ -2,12 +2,8 @@
 .env
 secrets/
 
-# Development files 
-dev-config.js
-
-# API Keys
-api-keys.js
-secrets/
+# Development files - API key 
+config.js
 
 # Node modules
 node_modules/
