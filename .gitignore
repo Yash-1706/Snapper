@@ -1,0 +1,39 @@
+# Environment variables
+.env
+sidebar/scripts/dev-config.js
+sidebar/scripts/config.js
+api-keys.js
+secrets/
+
+# Development files 
+dev-config.js
+
+# API Keys
+api-keys.js
+secrets/
+
+# Node modules
+node_modules/
+package-lock.json
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Chrome extension files
+*.crx
+*.pem
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+temp/
+tmp/
