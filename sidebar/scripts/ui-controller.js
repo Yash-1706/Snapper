@@ -1,11 +1,8 @@
-// UI Controller - Handle all UI interactions
+// UI Controller - Updated for direct quick actions
 class UIController {
     constructor() {
         this.userInput = null;
         this.sendBtn = null;
-        this.quickActionsToggle = null;
-        this.quickActionsContent = null;
-        this.contextMode = null;
         this.init();
     }
 
@@ -19,9 +16,6 @@ class UIController {
     initializeElements() {
         this.userInput = document.getElementById('userInput');
         this.sendBtn = document.getElementById('sendBtn');
-        this.quickActionsToggle = document.getElementById('quickActionsToggle');
-        this.quickActionsContent = document.getElementById('quickActionsContent');
-        this.contextMode = document.getElementById('contextMode');
     }
 
     setupEventListeners() {
@@ -36,18 +30,8 @@ class UIController {
             this.sendBtn.addEventListener('click', () => this.handleSendMessage());
         }
 
-        // Quick actions toggle
-        if (this.quickActionsToggle) {
-            this.quickActionsToggle.addEventListener('click', () => this.toggleQuickActions());
-        }
-
-        // Quick action buttons
+        // Quick action buttons - Direct execution
         this.setupQuickActionButtons();
-
-        // Context mode change
-        if (this.contextMode) {
-            this.contextMode.addEventListener('change', () => this.handleContextChange());
-        }
     }
 
     handleInputChange() {
@@ -55,11 +39,9 @@ class UIController {
         this.userInput.style.height = 'auto';
         this.userInput.style.height = Math.min(this.userInput.scrollHeight, 120) + 'px';
         
-        // Enable send button only if input has content AND content is extracted
+        // Enable/disable send button
         const hasContent = this.userInput.value.trim().length > 0;
-        const contentReady = window.sidebarApp && window.sidebarApp.isContentExtracted;
-        
-        this.sendBtn.disabled = !(hasContent && contentReady);
+        this.sendBtn.disabled = !hasContent;
     }
 
     handleKeyDown(e) {
@@ -71,17 +53,11 @@ class UIController {
         }
     }
 
-    handleSendMessage() {
+    async handleSendMessage() {
         const message = this.userInput.value.trim();
-        if (message && !this.sendBtn.disabled) {
-            // Check if content is extracted before sending
-            if (window.sidebarApp && !window.sidebarApp.canSendMessage()) {
-                return;
-            }
-
-            console.log('Sending message:', message);
-            // TODO: Add actual message sending logic
+        if (message && !this.sendBtn.disabled && window.chatHandler) {
             this.clearInput();
+            await window.chatHandler.handleUserMessage(message);
         }
     }
 
@@ -91,45 +67,36 @@ class UIController {
         this.sendBtn.disabled = true;
     }
 
-    toggleQuickActions() {
-        const isExpanded = this.quickActionsContent.style.display !== 'none';
-        this.quickActionsContent.style.display = isExpanded ? 'none' : 'grid';
-
-        const arrow = this.quickActionsToggle.querySelector('.toggle-arrow');
-        if (arrow) {
-            arrow.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
-        }
-    }
-
     setupQuickActionButtons() {
         document.querySelectorAll('.quick-action-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('click', async () => {
                 const prompt = btn.getAttribute('data-prompt');
-                this.userInput.value = prompt;
-                this.handleInputChange();
-                this.userInput.focus();
+                const actionType = btn.getAttribute('data-action');
+                
+                if (window.chatHandler) {
+                    await window.chatHandler.handleQuickAction(actionType, prompt);
+                }
             });
         });
     }
 
-    handleContextChange() {
-        const selectedMode = this.contextMode.value;
-        console.log('Context mode changed to:', selectedMode);
-        // TODO: Handle context mode change logic
+    disableInterface() {
+        if (this.userInput) this.userInput.disabled = true;
+        if (this.sendBtn) this.sendBtn.disabled = true;
+        
+        document.querySelectorAll('.quick-action-btn').forEach(btn => {
+            btn.disabled = true;
+        });
     }
 
-    showLoading() {
-        const loadingContainer = document.getElementById('loadingContainer');
-        if (loadingContainer) {
-            loadingContainer.style.display = 'flex';
-        }
-    }
-
-    hideLoading() {
-        const loadingContainer = document.getElementById('loadingContainer');
-        if (loadingContainer) {
-            loadingContainer.style.display = 'none';
-        }
+    enableInterface() {
+        if (this.userInput) this.userInput.disabled = false;
+        
+        document.querySelectorAll('.quick-action-btn').forEach(btn => {
+            btn.disabled = false;
+        });
+        
+        this.handleInputChange(); // Update send button state
     }
 }
 
