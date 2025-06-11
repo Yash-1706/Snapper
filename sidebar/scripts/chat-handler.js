@@ -28,19 +28,30 @@ class ChatHandler {
         this.setQuickActionProcessing(actionType, true);
         this.hideWelcomeMessage();
 
+        // Add user message
         this.addMessage('user', prompt, 'You');
+
+        // Show typing indicator
         this.showTypingIndicator();
 
         try {
             const response = await window.geminiAPI.generateResponse(prompt, window.sidebarApp.currentContent);
             
+            // Hide typing indicator before adding response
             this.hideTypingIndicator();
-            this.addMessage('ai', this.formatResponse(response), 'Snapper AI');
+            
+            // Wait a moment for smooth transition
+            setTimeout(() => {
+                this.addMessage('ai', this.formatResponse(response), 'Snapper AI');
+            }, 250);
             
         } catch (error) {
             console.error('Error generating response:', error);
             this.hideTypingIndicator();
-            this.addMessage('ai', `Sorry, I encountered an error: ${error.message}. Please try again.`, 'Snapper AI');
+            
+            setTimeout(() => {
+                this.addMessage('ai', `Sorry, I encountered an error: ${error.message}. Please try again.`, 'Snapper AI');
+            }, 250);
         } finally {
             this.isProcessing = false;
             this.setQuickActionProcessing(actionType, false);
@@ -62,32 +73,33 @@ class ChatHandler {
         this.isProcessing = true;
         this.hideWelcomeMessage();
 
+        // Add user message
         this.addMessage('user', message, 'You');
+
+        // Show typing indicator
         this.showTypingIndicator();
 
         try {
             const response = await window.geminiAPI.generateResponse(message, window.sidebarApp.currentContent);
             
+            // Hide typing indicator before adding response
             this.hideTypingIndicator();
-            this.addMessage('ai', this.formatResponse(response), 'Snapper AI');
+            
+            // Wait a moment for smooth transition
+            setTimeout(() => {
+                this.addMessage('ai', this.formatResponse(response), 'Snapper AI');
+            }, 250);
             
         } catch (error) {
             console.error('Error generating response:', error);
             this.hideTypingIndicator();
-            this.addMessage('ai', `Sorry, I encountered an error: ${error.message}. Please try again.`, 'Snapper AI');
+            
+            setTimeout(() => {
+                this.addMessage('ai', `Sorry, I encountered an error: ${error.message}. Please try again.`, 'Snapper AI');
+            }, 250);
         } finally {
             this.isProcessing = false;
         }
-    }
-
-    formatResponse(response) {
-        // Format the response for better readability
-        return response
-            .replace(/\n\n/g, '<br><br>')
-            .replace(/\n/g, '<br>')
-            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-            .replace(/\*(.*?)\*/g, '<em>$1</em>')
-            .replace(/`(.*?)`/g, '<code>$1</code>');
     }
 
     addMessage(type, content, sender) {
@@ -99,10 +111,56 @@ class ChatHandler {
         const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
         messageElement.innerHTML = `
-            <div class="message-header">
-                <div class="message-avatar">${type === 'user' ? 'U' : 'AI'}</div>
-                <span class="message-sender">${sender}</span>
-            </div>
+            <div class="message-content">${content}</div>
+            <div class="message-time">${timestamp}</div>
+        `;
+
+        // Add with animation
+        messageElement.style.opacity = '0';
+        messageElement.style.transform = 'translateY(10px)';
+        
+        this.chatMessages.appendChild(messageElement);
+        
+        // Trigger animation
+        requestAnimationFrame(() => {
+            messageElement.style.transition = 'all 0.3s ease-out';
+            messageElement.style.opacity = '1';
+            messageElement.style.transform = 'translateY(0)';
+        });
+        
+        this.scrollToBottom();
+    }
+
+    formatResponse(response) {
+    // Clean up the response and format it properly
+    let cleanResponse = response;
+    
+    // Remove any HTML tags that might be in the response
+    cleanResponse = cleanResponse.replace(/<[^>]*>/g, '');
+    
+    // Fix common formatting issues
+    cleanResponse = cleanResponse
+        .replace(/\n\n+/g, '\n\n') // Multiple newlines to double newlines
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold text
+        .replace(/\*(.*?)\*/g, '<em>$1</em>') // Italic text
+        .replace(/`(.*?)`/g, '<code>$1</code>') // Inline code
+        .replace(/\n/g, '<br>') // Line breaks
+        .trim();
+    
+    return cleanResponse;
+}
+
+
+    addMessage(type, content, sender) {
+        if (!this.chatMessages) return;
+
+        const messageElement = document.createElement('div');
+        messageElement.className = `message ${type}`;
+
+        const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+        // Simplified message structure for WhatsApp-style layout
+        messageElement.innerHTML = `
             <div class="message-content">${content}</div>
             <div class="message-time">${timestamp}</div>
         `;
@@ -116,18 +174,17 @@ class ChatHandler {
     showTypingIndicator() {
         if (!this.chatMessages) return;
 
+        // Remove any existing typing indicator first
+        this.hideTypingIndicator();
+
         const typingElement = document.createElement('div');
         typingElement.className = 'message ai typing-indicator';
         typingElement.id = 'typingIndicator';
         typingElement.innerHTML = `
-            <div class="message-header">
-                <div class="message-avatar">AI</div>
-                <span class="message-sender">Snapper AI</span>
-            </div>
             <div class="typing-animation">
-                <span class="typing-dot"></span>
-                <span class="typing-dot"></span>
-                <span class="typing-dot"></span>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
             </div>
         `;
 
@@ -138,7 +195,15 @@ class ChatHandler {
     hideTypingIndicator() {
         const typingIndicator = document.getElementById('typingIndicator');
         if (typingIndicator) {
-            typingIndicator.remove();
+            // Smooth fade out before removal
+            typingIndicator.style.opacity = '0';
+            typingIndicator.style.transform = 'translateY(-10px)';
+            
+            setTimeout(() => {
+                if (typingIndicator && typingIndicator.parentNode) {
+                    typingIndicator.parentNode.removeChild(typingIndicator);
+                }
+            }, 200);
         }
     }
 

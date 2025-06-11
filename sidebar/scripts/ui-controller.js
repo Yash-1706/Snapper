@@ -1,8 +1,8 @@
-// UI Controller - Updated for direct quick actions
 class UIController {
     constructor() {
         this.userInput = null;
         this.sendBtn = null;
+        this.quickActionsUsed = false; // Session-based flag
         this.init();
     }
 
@@ -10,6 +10,7 @@ class UIController {
         document.addEventListener('DOMContentLoaded', () => {
             this.initializeElements();
             this.setupEventListeners();
+            this.showQuickActions(); // Always show on load
         });
     }
 
@@ -30,8 +31,41 @@ class UIController {
             this.sendBtn.addEventListener('click', () => this.handleSendMessage());
         }
 
-        // Quick action buttons - Direct execution
+        // Quick action buttons - Hide after first use in this session
         this.setupQuickActionButtons();
+    }
+
+    setupQuickActionButtons() {
+        document.querySelectorAll('.quick-action-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const prompt = btn.getAttribute('data-prompt');
+                const actionType = btn.getAttribute('data-action');
+                
+                // Hide quick actions after first use in this session
+                if (!this.quickActionsUsed) {
+                    this.hideQuickActions();
+                    this.quickActionsUsed = true;
+                }
+                
+                if (window.chatHandler) {
+                    await window.chatHandler.handleQuickAction(actionType, prompt);
+                }
+            });
+        });
+    }
+
+    showQuickActions() {
+        const quickActions = document.getElementById('quickActions');
+        if (quickActions) {
+            quickActions.style.display = 'block';
+        }
+    }
+
+    hideQuickActions() {
+        const quickActions = document.getElementById('quickActions');
+        if (quickActions) {
+            quickActions.style.display = 'none';
+        }
     }
 
     handleInputChange() {
@@ -56,6 +90,12 @@ class UIController {
     async handleSendMessage() {
         const message = this.userInput.value.trim();
         if (message && !this.sendBtn.disabled && window.chatHandler) {
+            // Hide quick actions when user sends their own message
+            if (!this.quickActionsUsed) {
+                this.hideQuickActions();
+                this.quickActionsUsed = true;
+            }
+            
             this.clearInput();
             await window.chatHandler.handleUserMessage(message);
         }
@@ -65,19 +105,6 @@ class UIController {
         this.userInput.value = '';
         this.userInput.style.height = 'auto';
         this.sendBtn.disabled = true;
-    }
-
-    setupQuickActionButtons() {
-        document.querySelectorAll('.quick-action-btn').forEach(btn => {
-            btn.addEventListener('click', async () => {
-                const prompt = btn.getAttribute('data-prompt');
-                const actionType = btn.getAttribute('data-action');
-                
-                if (window.chatHandler) {
-                    await window.chatHandler.handleQuickAction(actionType, prompt);
-                }
-            });
-        });
     }
 
     disableInterface() {

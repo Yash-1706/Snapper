@@ -1,60 +1,40 @@
-// Theme Manager - Fixed version
+// Theme Manager - Dark theme only for v0
 class ThemeManager {
     constructor() {
         this.currentTheme = 'monokai';
-        this.themeToggle = null;
         this.init();
     }
 
     init() {
         document.addEventListener('DOMContentLoaded', () => {
-            this.themeToggle = document.getElementById('themeToggle');
-            this.loadSavedTheme();
+            this.applyTheme();
             this.setupEventListeners();
         });
     }
 
     setupEventListeners() {
-        if (this.themeToggle) {
-            // DON'T call this.themeToggle() - it's a DOM element, not a function
-            // Instead, add event listener
-            this.themeToggle.addEventListener('click', () => {
-                this.toggleTheme(); // Call the method, not the element
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            // Theme toggle now just shows a fun animation
+            themeToggle.addEventListener('click', () => {
+                this.playAnimation();
             });
         }
     }
 
-    toggleTheme() {
-        this.currentTheme = this.currentTheme === 'monokai' ? 'light' : 'monokai';
-        this.applyTheme();
-        this.saveTheme();
-        this.updateThemeIcon();
-    }
-
-    applyTheme() {
-        document.documentElement.setAttribute('data-theme', this.currentTheme);
-        document.body.setAttribute('data-theme', this.currentTheme);
-    }
-
-    updateThemeIcon() {
-        const themeIcon = document.querySelector('.theme-icon');
-        if (themeIcon) {
-            themeIcon.textContent = this.currentTheme === 'monokai' ? '☀️' : '🌙';
+    playAnimation() {
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            themeToggle.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                themeToggle.style.transform = 'scale(1)';
+            }, 150);
         }
     }
 
-    saveTheme() {
-        chrome.storage.local.set({ theme: this.currentTheme });
-    }
-
-    loadSavedTheme() {
-        chrome.storage.local.get(['theme'], (result) => {
-            if (result.theme) {
-                this.currentTheme = result.theme;
-                this.applyTheme();
-                this.updateThemeIcon();
-            }
-        });
+    applyTheme() {
+        document.documentElement.setAttribute('data-theme', 'monokai');
+        document.body.setAttribute('data-theme', 'monokai');
     }
 }
 

@@ -107,13 +107,10 @@ class SidebarApp {
         }
 
         this.showLoading();
-        this.showStatus('🔄 Extracting page content...', 'extracting');
 
         try {
-            // Ensure content script is injected
             await this.ensureContentScriptInjected(this.currentTab.id);
 
-            // Extract content
             const response = await chrome.tabs.sendMessage(this.currentTab.id, {
                 action: 'extractContent',
                 mode: 'fullPage'
@@ -125,7 +122,8 @@ class SidebarApp {
                 this.hideLoading();
                 this.hideWelcomeMessage();
                 this.enableChatInterface();
-                this.showStatus(`✅ Extracted ${response.content.wordCount} words`, 'success');
+                // REMOVE THIS LINE:
+                // this.showStatus(`✅ Extracted ${response.content.wordCount} words`, 'success');
                 console.log('✅ Content extracted successfully');
             } else {
                 throw new Error(response ? response.error : 'No response from content script');
@@ -136,6 +134,7 @@ class SidebarApp {
             this.showStatus('❌ Failed to extract content - Try refreshing the page', 'error');
         }
     }
+
 
     async ensureContentScriptInjected(tabId) {
         try {
