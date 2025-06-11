@@ -1,36 +1,46 @@
-/* Monokai Pro Theme Variables */
+/* Enhanced Monokai Pro Theme - Blue Cyan Accent */
 :root[data-theme="monokai"] {
     /* Background Colors */
-    --bg-primary: #2D2A2E;
-    --bg-secondary: #403E41;
-    --bg-tertiary: #5B595C;
+    --bg-primary: #221F22;
+    --bg-secondary: #2D2A2E;
+    --bg-tertiary: #403E41;
     --bg-hover: #4A4751;
+    --bg-card: #2A2A2E;
+    --bg-input: #1A1A1D;
     
     /* Text Colors */
     --text-primary: #FCFCFA;
     --text-secondary: #C1C0C0;
     --text-muted: #939293;
+    --text-accent: #78DCE8;
     
-    /* Accent Colors */
-    --accent-purple: #AB9DF2;
-    --accent-purple-alpha: rgba(171, 157, 242, 0.2);
+    /* Accent Colors - Blue Cyan Theme */
+    --accent-cyan: #78DCE8;
+    --accent-cyan-hover: #8BE5F0;
+    --accent-cyan-alpha: rgba(120, 220, 232, 0.15);
     --accent-green: #A9DC76;
-    --accent-orange: #FC9867;
     --accent-pink: #FF6188;
-    --accent-blue: #78DCE8;
+    --accent-orange: #FFB86C;
+    --accent-yellow: #F1FA8C;
     
     /* Border Colors */
-    --border-color: #5B595C;
-    --border-light: #6B696C;
+    --border-color: #403E41;
+    --border-light: #4A4751;
+    --border-focus: #78DCE8;
     
     /* Status Colors */
     --success: #A9DC76;
-    --warning: #FC9867;
+    --warning: #FFB86C;
     --error: #FF6188;
     --info: #78DCE8;
     
     /* Shadows */
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
-    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.6);
+    --shadow-cyan: 0 4px 16px rgba(120, 220, 232, 0.2);
+    
+    /* Gradients */
+    --gradient-cyan: linear-gradient(135deg, #78DCE8 0%, #8BE5F0 100%);
+    --gradient-dark: linear-gradient(135deg, #221F22 0%, #2D2A2E 100%);
 }

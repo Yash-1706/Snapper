@@ -1,75 +1,178 @@
-/* Updated Base Styles with Custom Font */
+/* Global Monokai Theme - Applied to Entire Extension */
+:root {
+    /* Background Colors */
+    --bg-primary: #221F22;
+    --bg-secondary: #2D2A2E;
+    --bg-tertiary: #403E41;
+    --bg-hover: #4A4751;
+    --bg-card: #2A2A2E;
+    --bg-input: #1A1A1D;
+    
+    /* Text Colors */
+    --text-primary: #FCFCFA;
+    --text-secondary: #C1C0C0;
+    --text-muted: #939293;
+    --text-accent: #78DCE8;
+    
+    /* Accent Colors */
+    --accent-cyan: #78DCE8;
+    --accent-cyan-hover: #8BE5F0;
+    --accent-cyan-alpha: rgba(120, 220, 232, 0.15);
+    --accent-green: #A9DC76;
+    --accent-pink: #FF6188;
+    --accent-orange: #FFB86C;
+    --accent-yellow: #F1FA8C;
+    
+    /* Border Colors */
+    --border-color: #403E41;
+    --border-light: #4A4751;
+    --border-focus: #78DCE8;
+    
+    /* Status Colors */
+    --success: #A9DC76;
+    --warning: #FFB86C;
+    --error: #FF6188;
+    --info: #78DCE8;
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.6);
+    --shadow-cyan: 0 4px 16px rgba(120, 220, 232, 0.2);
+    
+    /* Gradients */
+    --gradient-cyan: linear-gradient(135deg, #78DCE8 0%, #8BE5F0 100%);
+    --gradient-dark: linear-gradient(135deg, #221F22 0%, #2D2A2E 100%);
+}
+
+/* Universal Reset with Theme Colors */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body, button, input, textarea, select, h1, h2, h3 {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
-
-
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.5;
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
+html, body {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
     overflow: hidden;
     user-select: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Typography with Inter Font */
-h1, h2, h3 {
+/* Global Typography with Theme Colors */
+h1, h2, h3, h4, h5, h6 {
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     color: var(--text-primary);
-    letter-spacing: -0.02em; /* Tighter letter spacing for headings */
-}
-
-h1 {
-    font-size: 16px;
-    font-weight: 600;
-}
-
-h2 {
-    font-size: 20px;
-    font-weight: 600;
+    letter-spacing: -0.02em;
 }
 
 p {
     color: var(--text-secondary);
     font-weight: 400;
+    line-height: 1.5;
 }
 
-/* Button styles with better typography */
+/* Global Button Styling */
 button {
     font-family: 'Inter', sans-serif;
     font-weight: 500;
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-/* Input styles with better typography */
-input, textarea, select {
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
     color: var(--text-primary);
-    transition: all 0.2s ease;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 8px;
 }
 
-/* Labels with better typography */
-label {
+button:hover {
+    background: var(--bg-hover);
+    border-color: var(--accent-cyan);
+    box-shadow: var(--shadow-cyan);
+}
+
+button:focus {
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 2px;
+}
+
+button:disabled {
+    background: var(--bg-tertiary);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* Global Input Styling */
+input, textarea, select {
     font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 12px;
-    letter-spacing: 0.01em;
+    font-weight: 400;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 0 3px var(--accent-cyan-alpha);
+    background: var(--bg-secondary);
+}
+
+input::placeholder, textarea::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+/* Global Link Styling */
+a {
+    color: var(--accent-cyan);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--accent-cyan-hover);
+    text-decoration: underline;
+}
+
+/* Global Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-cyan);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-cyan-hover);
+}
+
+::-webkit-scrollbar-corner {
+    background: var(--bg-primary);
+}
+
+/* Global Selection Styling */
+::selection {
+    background: var(--accent-cyan-alpha);
+    color: var(--text-primary);
+}
+
+::-moz-selection {
+    background: var(--accent-cyan-alpha);
+    color: var(--text-primary);
 }
