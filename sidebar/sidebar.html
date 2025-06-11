@@ -19,11 +19,11 @@
                 <img src="../assets/images/logo.png" alt="Snapper Logo" class="logo">
                 <h1 class="app-title">Snapper</h1>
             </div>
-            <div class="header-right">
+            <!-- <div class="header-right">
                 <button class="theme-toggle" id="themeToggle" title="Toggle theme">
                     <span class="theme-icon">🌙</span>
                 </button>
-            </div>
+            </div> -->
         </header>
 
         <!-- Status Indicator -->
@@ -39,59 +39,53 @@
             <p class="loading-text">Processing your request...</p>
         </div>
 
-        <!-- Quick Actions - Always Visible -->
-        <div class="quick-actions" id="quickActions">
-            <h3 class="quick-actions-title">Quick Analysis</h3>
-            <div class="quick-actions-grid">
-                <button class="quick-action-btn" data-prompt="Summarize this page in 3-4 sentences."
-                    data-action="summarize">
-                    📝 Summarize
-                </button>
-                <button class="quick-action-btn" data-prompt="List the main points or key information from this page."
-                    data-action="keypoints">
-                    📋 Key Points
-                </button>
-                <button class="quick-action-btn" data-prompt="Explain the main topic of this page in simple terms."
-                    data-action="explain">
-                    💡 Explain
-                </button>
-                <button class="quick-action-btn" data-prompt="What are the most important takeaways from this content?"
-                    data-action="takeaways">
-                    ⭐ Takeaways
-                </button>
+        <!-- Main Chat Container -->
+        <div class="chat-container" id="chatContainer">
+    
+        <!-- Welcome Message -->
+        <div class="welcome-message" id="welcomeMessage">
+            <div class="welcome-content">
+                <h2>Welcome to Snapper!</h2>
+                <p>Use the quick actions below or ask your own question.</p>
             </div>
         </div>
 
-        <!-- Main Chat Container -->
-        <div class="chat-container" id="chatContainer">
-
-            <!-- Welcome Message -->
-            <div class="welcome-message" id="welcomeMessage">
-                <div class="welcome-content">
-                    <h2>Welcome to Snapper!</h2>
-                    <p>Click any quick action above to analyze this page, or ask your own question below.</p>
-                </div>
-            </div>
-
-            <!-- Chat Messages -->
+        <!-- Chat Messages -->
             <div class="chat-messages" id="chatMessages">
                 <!-- Messages will be dynamically added here -->
+            </div>
+        </div>
+
+        <!-- Quick Actions - Moved above input -->
+        <div class="quick-actions" id="quickActions">
+            <div class="quick-actions-grid">
+                <button class="quick-action-btn" data-prompt="Summarize this page in 3-4 sentences." data-action="summarize">
+                    📝 Summarize
+                </button>
+                <button class="quick-action-btn" data-prompt="Explain the main topic of this page in simple terms." data-action="explain">
+                    💡 Explain
+                </button>
             </div>
         </div>
 
         <!-- Input Section -->
         <div class="input-section">
             <div class="input-container">
-                <textarea id="userInput" class="user-input" placeholder="Ask a question about this page..."
-                    rows="1"></textarea>
+                <textarea 
+                    id="userInput" 
+                    class="user-input" 
+                    placeholder="Ask a question about this page..."
+                    rows="1"
+                ></textarea>
                 <button class="send-btn" id="sendBtn">
                     <span class="send-icon">→</span>
                 </button>
             </div>
             <div class="input-footer">
-                <span class="input-hint">Press Enter to send, Shift+Enter for new line</span>
+                <span class="input-hint">Press Shift + Enter to go to a new line</span>
             </div>
         </div>
+
 
     </div>
 
